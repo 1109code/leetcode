@@ -10,11 +10,11 @@ class Solution:
         
         while stack:
             node = stack.pop()
-            # 부모 노드 부터 하향식 스왑
+            
             if node:
-                node.left, node.right = node.right, node.left
-                
                 stack.append(node.left)
                 stack.append(node.right)
+                
+                node.left, node.right = node.right, node.left # 후위 순회 (수업 때 배운거!)
                 
         return root
