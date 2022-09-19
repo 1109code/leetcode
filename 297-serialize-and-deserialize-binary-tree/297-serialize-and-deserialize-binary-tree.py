@@ -16,7 +16,7 @@ class Codec:
         queue = collections.deque([root])
         result = ['#']
         # 트리 BFS 직렬화
-        while queue:
+        while queue:                    # 이전 반복 BFS 풀이 활용
             node = queue.popleft()
             if node:
                 queue.append(node.left)
@@ -29,6 +29,7 @@ class Codec:
         return ' '.join(result)
 
     def deserialize(self, data):
+        
         """Decodes your encoded data to tree.
         
         :type data: str
@@ -40,9 +41,10 @@ class Codec:
         
         nodes = data.split()
         
-        root = TreeNode(int(nodes[1]))
+        root = TreeNode(int(nodes[1]))          # 편의를 위해 트리는 인덱스 1로 시작
         queue = collections.deque([root])
         index = 2
+        
         # 빠른 런너처럼 자식 노드 결과를 먼저 확인 후 큐 삽입
         while queue:
             node = queue.popleft()
