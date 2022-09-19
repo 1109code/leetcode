@@ -6,8 +6,15 @@
 #         self.right = right
 class Solution:
     def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
-        if root:
-            root.left, root.right = \
-            self.invertTree(root.right), self.invertTree(root.left)         # 이번에는 오르쪽 부터 탐색하며 자식이 없으면 
-            return root                                                     # 왼쪽과 오른쪽 스왑
-        return None
+        stack = collections.deque([root])
+        
+        while stack:
+            node = stack.pop()
+            # 부모 노드 부터 하향식 스왑
+            if node:
+                node.left, node.right = node.right, node.left
+                
+                stack.append(node.left)
+                stack.append(node.right)
+                
+        return root
