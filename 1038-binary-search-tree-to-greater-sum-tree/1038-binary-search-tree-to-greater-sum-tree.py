@@ -11,7 +11,7 @@ class Solution:
         if root:
             self.bstToGst(root.right)       # 오른쪽 자식부터
             self.val += root.val            # val(class 변수)에 root의 val 추가하고
-            root.val = self.val             # root에 val 초기화
+            root.val = self.val             # root에 val 초기화(오른쪽 자식만 크므로 오른쪽만 추가)
             self.bstToGst(root.left)        # 왼쪽 자식 재귀
         
         return root
