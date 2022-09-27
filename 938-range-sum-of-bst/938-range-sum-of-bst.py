@@ -6,14 +6,16 @@
 #         self.right = right
 class Solution:
     def rangeSumBST(self, root: Optional[TreeNode], L: int, R: int) -> int:
-        def dfs(node: TreeNode):
-            if not node:
-                return 0
-            
-            if node.val < L:                # 어차피 왼쪽 가지들은 현재 노드보다 작으므로
-                return dfs(node.right)      # 현재 노드가 L보다 작으면 왼쪽 노드는 탐색 할 필요 X
-            elif node.val > R:
-                return dfs(node.left)       # 동일
-            return node.val + dfs(node.left) + dfs(node.right)
-        
-        return dfs(root)
+        stack, sum = [root], 0
+        # 스택 이용 필요한 노드 DFS 반복
+        while stack:
+            node = stack.pop()
+            if node:
+                if node.val > L:                # 재귀로 왼쪽 오른쪽 자식 탐색
+                    stack.append(node.left)
+                if node.val < R:
+                    stack.append(node.right)
+                if L <= node.val <= R:          # 현재 노드 추가
+                    sum += node.val
+                    
+        return sum
